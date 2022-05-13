@@ -4,10 +4,16 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+//chamando express session:
+const session = require('express-session');
+
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 
 const app = express();
+
+//usando o express-session em nível de aplicativo
+app.use(session({ secret: Math.random().toString().slice(-10), resave: false, saveUninitialized: true}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
