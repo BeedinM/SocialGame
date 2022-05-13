@@ -9,9 +9,9 @@ router.get('/', (req, res, next) => {
 router.post('/', async (req, res, next) => {
     const { email, senha } = req.body;
 
-    const { usuario_id: userId } = await loginController.fazerLogin({email, senha});
-
-    console.log(userId);
-})
+    const { usuario_id: userId } = await loginController.fazerLogin({ email, senha });
+    req.session.userId = userId;
+    res.redirect('/perfil');
+});
  
 module.exports = router;
